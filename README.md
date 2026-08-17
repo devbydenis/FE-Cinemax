@@ -1,67 +1,77 @@
 # Cinemax
 
-A modern and responsive online ticketing application built with React and TypeScript, featuring state management, form validation, and Docker support for easy deployment.
+A modern and responsive online cinema ticketing application prototype built with React and TypeScript. Browse movies from TMDB, book seats, pay, and manage your profile — complete with an admin dashboard.
 
 ## Preview
 
-![Preview Image](preview.png)
+<div align="center">
+  <img src="preview-web.png" width="60%" hspace=5/>
+  <img src="preview-mobile.png" width="25%" />
+</div>
 
 ## 🚀 Features
 
-- ✅ Create, read, update, and delete todos
-- 🎨 Modern and responsive UI with Tailwind CSS
-- 🔄 State management with Redux and Redux Persist
-- 📝 Form validation with React Hook Form
-- 🧭 Client-side routing with React Router DOM
-- 💾 Data persistence across browser sessions
-- 🐳 Docker support for containerized deployment
-- ⚡ Fast development with Vite
-- 📱 Mobile-friendly responsive design
+- 🎬 Movie catalog sourced from the **TMDB API**
+  - Now Playing & Upcoming sections
+  - Search, genre filter, and pagination on the explore page
+  - Detailed movie page (cast, directors, runtime, genres)
+- 🔐 Authentication flow: login, register, forgot & reset password
+- 🎫 Booking flow: pick a movie → choose seats → payment method → e-ticket
+- 👤 Profile: account information and booking history
+- 🛠️ Admin dashboard (with charts), add movie, and movie list management
+- 🧪 Mock adapter for full dev experience without a backend (`VITE_ENABLE_MOCKS=true`)
+- 💾 State persisted across sessions with Redux Persist
+- 📱 Fully responsive, mobile-friendly UI
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **State Management**: Redux with Redux Persist
-- **Routing**: React Router DOM
-- **Form Handling**: React Hook Form
+- **Frontend Framework**: React 19 with TypeScript
+- **Build Tool**: Vite 6
+- **Styling**: Tailwind CSS v4
+- **State Management**: Redux Toolkit with Redux Persist
+- **Server State**: TanStack Query (React Query)
+- **Routing**: React Router DOM v7
+- **Form Handling**: React Hook Form + Yup validation
+- **HTTP Client**: Axios
+- **Data Fetching**: TMDB API + custom backend contract
+- **Charts**: Chart.js with react-chartjs-2
 - **Icons**: React Icons
-- **Containerization**: Docker
+- **Containerization**: Docker (multi-stage build)
 
 ## 📋 Prerequisites
 
-Before running this project, make sure you have the following installed:
-
-- Node.js (version 16 or higher)
-- npm or yarn
+- Node.js 18 or higher
+- pnpm (recommended) or npm
 - Docker (optional, for containerized deployment)
+- TMDB API key (see [Configuration](#-configuration))
 
 ## 🚀 Getting Started
 
+### Environment Setup
+
+Copy `.env.example` to `.env.local` and fill in the values:
+
+```bash
+cp .env.example .env.local
+```
+
 ### Local Development
 
-1. **Clone the repository**
+1. **Install dependencies**
    ```bash
-   git clone https://github.com/devbydenis/Cinemax-Prototype.git
-   cd Cinemax-Prototype
-   ```
-
-2. **Install dependencies**
-   ```bash
+   pnpm install
+   # or
    npm install
-   # or
-   yarn install
    ```
 
-3. **Start the development server**
+2. **Start the development server**
    ```bash
-   npm run dev
+   pnpm dev
    # or
-   yarn dev
+   npm run dev
    ```
 
-4. **Open your browser**
+3. **Open your browser**
    Navigate to `http://localhost:5173` to view the application.
 
 ### Docker Deployment
@@ -73,65 +83,101 @@ Before running this project, make sure you have the following installed:
 
 2. **Run the container**
    ```bash
-   docker run -d --name container-cinemax -p 8080:80 image-cinemax
+   docker-compose up -d
    ```
 
 3. **Access the application**
-   Open your browser and go to `http://localhost:8080`
+   Open your browser and go to `http://localhost:9802`.
 
-<!-- ## 📁 Project Structure
+## 📁 Project Structure
 
 ```
-react-todo/
+cinemax/
 ├── public/
-│   └── vite.svg
+│   └── [static assets]
 ├── src/
-│   ├── components/
-│   │   └── [React components]
-│   ├── pages/
-│   │   └── [Page components]
-│   ├── store/
-│   │   └── [Redux store configuration]
-│   ├── types/
-│   │   └── [TypeScript type definitions]
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
+│   ├── app/
+│   │   ├── App.tsx                 # Route definitions
+│   │   ├── ErrorBoundary.tsx
+│   │   └── providers.tsx           # Global providers (store, query, router)
+│   ├── features/
+│   │   ├── admin/                  # Admin dashboard, add & list movies
+│   │   ├── auth/                   # Login, register, forgot/reset password
+│   │   ├── movies/                 # Home, explore, and movie detail pages
+│   │   ├── order/                  # Seat, payment, and ticket booking flow
+│   │   └── profile/                # Account information and booking history
+│   ├── shared/
+│   │   ├── components/             # Reusable UI components & layouts
+│   │   ├── config/env.ts           # Environment variable access
+│   │   ├── hooks/                  # Typed Redux hooks & debounce
+│   │   ├── lib/                    # HTTP clients, query client, TMDB client
+│   │   ├── mocks/                  # Dev-only mock adapter & in-memory DB
+│   │   └── types/                  # Shared TypeScript types
+│   ├── store/                      # Redux store & persisted reducers
+│   ├── index.css
+│   └── main.tsx
+├── docs/
+│   ├── backend-contract.md         # Custom backend API contract
+│   └── refactor-plan.md
+├── .env.example
 ├── Dockerfile
+├── docker-compose.yml
+├── eslint.config.js
 ├── package.json
-├── tailwind.config.js
 ├── tsconfig.json
 ├── vite.config.ts
 └── README.md
-``` -->
+```
 
 ## 🔧 Configuration
 
-### Tailwind CSS
-The project uses Tailwind CSS for styling. Configuration can be found in `index.css`.
+Configuration is done through environment variables (see `.env.example`):
 
-### Redux Store
-State management is handled by Redux with persistence. Store configuration is located in the `src/redux` directory.
+| Variable               | Description                                      | Default                         |
+| ---------------------- | ------------------------------------------------ | ------------------------------- |
+| `VITE_TMDB_URL`        | TMDB API base URL                                | `https://api.themoviedb.org/3`  |
+| `VITE_TMDB_API_KEY`    | TMDB API key                                     | —                               |
+| `VITE_TMDB_IMAGE_URL`  | TMDB image base URL                              | `https://image.tmdb.org/t/p/w500` |
+| `VITE_API_URL`         | Custom backend URL (auth/order/profile/admin)    | `http://localhost:8800`         |
+| `VITE_API_IMAGE_URL`   | Custom backend image uploads URL                 | `http://localhost:8800/uploads` |
+| `VITE_ENABLE_MOCKS`    | Use the dev-only mock adapter instead of backend | `true`                          |
 
-### Vite Configuration
-Build tool configuration can be found in `vite.config.ts`.
+### Data Source
+
+- **Movie catalog** comes from the public **TMDB API** (`src/features/movies/api/tmdb.ts`).
+- **Auth, orders, payments, profile, and admin** target the custom backend (`VITE_API_URL`), whose contract is documented in [`docs/backend-contract.md`](docs/backend-contract.md). Until the backend exists, run with `VITE_ENABLE_MOCKS=true` to use the mock adapter (`src/shared/mocks`).
 
 ## 📱 Features Overview
 
-### Online Ticketing
-- Add new tickets with form validation
-- Mark tickets as complete/incomplete
-- Edit existing tickets
-- Delete order
-- Filter movies (All, Active, Completed)
+### Authentication
+- Login, register, forgot password, and reset password pages
+- Protected routes redirect unauthenticated users
+- Token injected via Axios interceptor and persisted in Redux
+
+### Movie Catalog (TMDB)
+- Now Playing and Upcoming movie rows on the home page
+- Explore page with live search, genre filter, and pagination
+- Detailed movie page with synopsis, cast, and director info
+
+### Booking Flow
+- Seat selection with a timeline indicator
+- Payment page with multiple payment methods (OVO, GoPay, DANA, Visa, etc.)
+- E-ticket page with QR code and booking details
+
+### Profile
+- View and edit account information
+- Booking history with transaction status (success / pending / failed)
+
+### Admin
+- Dashboard with chart.js visualizations
+- Add and manage movies (list, delete)
 
 ### Data Persistence
-- All todos are automatically saved to localStorage using Redux Persist
+- Session state (auth, booking, order) automatically saved to localStorage using Redux Persist
 - Data persists across browser sessions and page refreshes
 
 ### Responsive Design
 - Fully responsive layout that works on desktop, tablet, and mobile devices
-- Modern UI components with smooth animations and transitions
 
 ## 🤝 Contributing
 
@@ -147,6 +193,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
+- TMDB for the movie data API
 - React team for the amazing framework
 - Vite team for the fast build tool
-- Tailwind CSS for the utility-f
+- Tailwind CSS for the utility-first CSS framework

@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../assets/cinemax-logo-transparent.png";
+import logo from "@/assets/cinemax-logo-transparent.png";
 import HamburgerMenu from "./HamburgerMenu";
 
 function NavbarAdmin() {

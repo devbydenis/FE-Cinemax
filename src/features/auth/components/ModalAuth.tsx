@@ -1,6 +1,6 @@
 import type { ModalAuthProps } from "../types/auth.types";
 
-function ModalAuth(props: ModalAuthProps) {
+export function ModalAuth(props: ModalAuthProps) {
   return (
     <>
       <div className="absolute top-0 right-0 bottom-0 left-0 z-10 bg-black/50"></div>
@@ -20,5 +20,3 @@ function ModalAuth(props: ModalAuthProps) {
     </>
   );
 }
-
-export default ModalAuth;

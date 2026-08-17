@@ -4,7 +4,7 @@ import type { InputFieldsProps } from "../types/auth.types";
 import type { FieldValues } from "react-hook-form";
 
 
-function InputField<T extends FieldValues>({
+export function InputField<T extends FieldValues>({
   htmlFor,
   name,
   type = "text",
@@ -61,6 +61,4 @@ function InputField<T extends FieldValues>({
       </section>
     </>
   );
-};
-
-export default InputField;
+}
