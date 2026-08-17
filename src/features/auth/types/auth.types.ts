@@ -20,15 +20,15 @@ export interface InputFieldsProps<T extends FieldValues> {
   errors: FieldErrors<T> 
 }
 
-export type AuthContextProps = {
-  isLoggedinRoute: boolean;
-  setIsLoggedinRoute: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export type RegisterFormValues = {
   email: string;
   password: string;
   confirmPassword: string;
+};
+
+export type LoginFormValues = {
+  email: string;
+  password: string;
 };
 
 export interface UserRegisterRequest {

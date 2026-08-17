@@ -11,8 +11,8 @@ export interface FormAddMovie {
   durationHour: number;
   durationMinute: number;
   directorName: string;
-  genres: string[];
-  cast: string[];
+  genres: string;
+  cast: string;
   synopsis: string;
 }
 
