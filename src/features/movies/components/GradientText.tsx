@@ -45,7 +45,7 @@ export function GradientText({
         </div>
       )}
       <div
-        className="animate-gradient relative z-2 inline-block bg-cover text-center text-6xl font-bold text-transparent"
+        className="animate-gradient relative z-2 inline-block bg-cover text-center text-5xl md:text-6xl font-bold text-transparent"
         style={{
           ...gradientStyle,
           backgroundClip: "text",
