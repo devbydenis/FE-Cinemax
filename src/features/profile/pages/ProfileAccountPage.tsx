@@ -11,7 +11,7 @@ import ModalProfile from "../components/ModalProfile";
 import { useOutletContext } from "react-router-dom";
 import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
 import { useAppSelector } from "@/shared/hooks/useAppSelector";
-import type { ProfileLayoutContext } from "@/shared/components/layouts/ProfileLayout";
+import type { ProfileLayoutContext } from "@/shared/layouts/ProfileLayout";
 
 interface FormInput {
   firstName: string;
@@ -89,11 +89,14 @@ function ProfileAccountPage() {
         <ModalProfile onClose={() => setShowAlert(false)} />
       </div>
       <div
-        className={`col-span-2 bg-white-primary/90 ${
+        className={`bg-white-primary/90 col-span-2 ${
           showEditProfile ? "absolute top-5 right-10 left-10 z-20" : "hidden"
         } shadow-orange rounded-2xl shadow-lg md:mr-10 md:block`}
       >
-        <form className="relative rounded-2xl p-10" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="relative rounded-2xl p-10"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           {showEditProfile && (
             <button
               className="absolute top-5 right-5 font-bold text-black"
@@ -181,7 +184,7 @@ function ProfileAccountPage() {
             </label>
           </section>
           <button
-            className="bg-orange mt-10 w-full rounded-lg px-6 py-3 font-bold text-white transition-all duration-300 active:scale-98 active:border-2 active:border-orange active:bg-white active:text-orange"
+            className="bg-orange active:border-orange active:text-orange mt-10 w-full rounded-lg px-6 py-3 font-bold text-white transition-all duration-300 active:scale-98 active:border-2 active:bg-white"
             type="submit"
           >
             Update Change
@@ -221,12 +224,12 @@ function InputField({
         {labelInput}
       </label>
       <input
-        className="border-gray w-full rounded border-1 px-6 py-3 focus:outline-none"
+        className="border-gray w-full rounded border px-6 py-3 focus:outline-none"
         type={typeInput}
         {...register(nameInput)}
         id={idInput}
       />
-      <p className="min-h-[20px] text-red-500">{errorMessage}</p>
+      <p className="min-h-5 text-red-500">{errorMessage}</p>
     </div>
   );
 }

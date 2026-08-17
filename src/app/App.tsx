@@ -3,10 +3,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "@/features/movies/pages/HomePage";
 import MoviesPage from "@/features/movies/pages/MoviesPage";
 import MovieDetailPage from "@/features/movies/pages/MovieDetailPage";
-import MainLayout from "@/shared/components/layouts/MainLayout";
-import AuthLayout from "@/shared/components/layouts/AuthLayout";
-import ProfileLayout from "@/shared/components/layouts/ProfileLayout";
-import AdminLayout from "@/shared/components/layouts/AdminLayout";
+import MainLayout from "@/shared/layouts/MainLayout";
+import AuthLayout from "@/shared/layouts/AuthLayout";
+import ProfileLayout from "@/shared/layouts/ProfileLayout";
+import AdminLayout from "@/shared/layouts/AdminLayout";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
 import ForgotPasswordPage from "@/features/auth/pages/ForgotPasswordPage";
@@ -16,12 +16,24 @@ import ProfileHistoryPage from "@/features/profile/pages/ProfileHistoryPage";
 import ProtectedRoute from "@/shared/components/ProtectedRoute";
 import NotFoundPage from "@/shared/pages/NotFoundPage";
 
-const OrderSeatPage = lazy(() => import("@/features/order/pages/OrderSeatPage"));
-const OrderPaymentPage = lazy(() => import("@/features/order/pages/OrderPaymentPage"));
-const OrderTicketPage = lazy(() => import("@/features/order/pages/OrderTicketPage"));
-const AdminDashboardPage = lazy(() => import("@/features/admin/pages/AdminDashboardPage"));
-const AdminAddMoviePage = lazy(() => import("@/features/admin/pages/AdminAddMoviePage"));
-const AdminListMoviePage = lazy(() => import("@/features/admin/pages/AdminListMoviePage"));
+const OrderSeatPage = lazy(
+  () => import("@/features/order/pages/OrderSeatPage"),
+);
+const OrderPaymentPage = lazy(
+  () => import("@/features/order/pages/OrderPaymentPage"),
+);
+const OrderTicketPage = lazy(
+  () => import("@/features/order/pages/OrderTicketPage"),
+);
+const AdminDashboardPage = lazy(
+  () => import("@/features/admin/pages/AdminDashboardPage"),
+);
+const AdminAddMoviePage = lazy(
+  () => import("@/features/admin/pages/AdminAddMoviePage"),
+);
+const AdminListMoviePage = lazy(
+  () => import("@/features/admin/pages/AdminListMoviePage"),
+);
 
 function App() {
   return (
