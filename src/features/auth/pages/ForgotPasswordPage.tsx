@@ -38,11 +38,11 @@ function ForgotPasswordPage() {
             required
             autoComplete="off"
           />
-          <small className="min-h-[20px] text-red-500">
+          <small className="min-h-5 text-red-500">
             {errors.email?.message}
           </small>
           <button
-            className="from-orange-500 to-orange-700 mt-4 rounded-md bg-gradient-to-r px-4 py-2 font-bold text-white transition duration-150 ease-in-out active:scale-99"
+            className="from-orange-500 to-orange-700 mt-4 rounded-md bg-linear-to-r px-4 py-2 font-bold text-white transition duration-150 ease-in-out active:scale-99"
             type="submit"
           >
             Send
