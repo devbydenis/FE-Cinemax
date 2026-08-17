@@ -26,14 +26,19 @@ function Navbar() {
       <ul className="flex items-center justify-between px-10 py-6 lg:px-20">
         <li>
           <Link to={"/"}>
-            <img src={logoTickitz} alt="logo-tickitz" width={200} className="underline hover:cursor-pointer" />
+            <img
+              src={logoTickitz}
+              alt="logo-tickitz"
+              width={200}
+              className="underline hover:cursor-pointer"
+            />
           </Link>
         </li>
         <li className="hidden gap-14 px-12 md:flex">
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "text-orange font-bold uppercase after:mt-0 after:block after:border-b-3 after:text-[#E95102]"
+                ? "text-orange after:text-orange font-bold uppercase after:mt-0 after:block after:border-b-3"
                 : "text-gray-400 uppercase"
             }
             to={"/"}
@@ -43,22 +48,12 @@ function Navbar() {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "text-orange font-bold uppercase after:mt-0 after:block after:border-b-3 after:text-[#E95102]"
+                ? "text-orange after:text-orange font-bold uppercase after:mt-0 after:block after:border-b-3"
                 : "text-gray-400 uppercase"
             }
             to={"/movies"}
           >
-            Movie
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-orange font-bold uppercase after:mt-0 after:block after:border-b-3 after:text-[#E95102]"
-                : "text-gray-400 uppercase"
-            }
-            to={"/movies"}
-          >
-            Buy Ticket
+            Movies
           </NavLink>
         </li>
         <li className="relative hidden gap-4 md:flex">
@@ -101,6 +96,9 @@ function Navbar() {
             </div>
           )}
         </li>
+
+        {/* Mobile View */}
+
         <li className="text-orange/80 md:hidden">
           {isShowMenu ? (
             <CgClose
@@ -114,38 +112,52 @@ function Navbar() {
             />
           )}
           {isShowMenu && (
-            <div className="absolute top-20 right-0 left-0 flex w-full flex-col items-center gap-8 bg-white py-5 shadow-lg">
+            <div className="absolute top-20 right-0 left-0 flex w-full flex-col items-center gap-8 bg-gray-900 py-5 shadow-lg">
               <div className="flex w-1/2 flex-col items-center gap-4 px-12">
                 <NavLink
                   className={({ isActive }) =>
                     isActive
-                      ? "text-orange font-bold uppercase after:mt-0 after:block after:border-b-3 after:text-[#E95102]"
-                      : "text-gray-400 uppercase"
+                      ? "text-orange after:text-orange font-bold uppercase after:mt-0 after:block after:border-b-3"
+                      : "text-gray-200 uppercase"
                   }
                   to={"/"}
                 >
                   Home
                 </NavLink>
-                <NavLink className="text-gray uppercase" to={"/movies"}>
-                  Movie
-                </NavLink>
-                <NavLink className="text-gray uppercase" to={"/movies"}>
-                  Buy Ticket
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-orange after:text-orange font-bold uppercase after:mt-0 after:block after:border-b-3"
+                      : "text-gray-200 uppercase"
+                  }
+                  to={"/movies"}
+                >
+                  Movies
                 </NavLink>
               </div>
+              <div className="w-full border-t-2 border-orange-900"></div>
               {isLogin ? (
-                <div className="flex items-center gap-4">
+                <div className="w-full px-2 flex items-center flex-col gap-4">
                   <Link
                     className={`h-10 w-10 cursor-pointer rounded-full bg-cover bg-center`}
                     style={{ backgroundImage: `url(${avatarDefault})` }}
                     to={"/profile/account"}
                   ></Link>
                   <Link
-                    className="cursor-pointer text-gray-800 uppercase"
+                    className="cursor-pointer text-gray-200 uppercase"
                     to={"/profile/account"}
                   >
-                    {profileName}
+                    Hi, {profileName}
                   </Link>
+                  <button
+                    className="w-full cursor-pointer rounded-xl border-2 border-red-500 px-4 py-2 text-red-500 uppercase"
+                    onClick={() => {
+                      navigate("/");
+                      dispatch(logoutUserAction());
+                    }}
+                  >
+                    Logout
+                  </button>
                 </div>
               ) : (
                 <div className="flex gap-4">
